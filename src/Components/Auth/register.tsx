@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Row, Col, Card, Typography } from 'antd';
 import { UserOutlined, LockOutlined, RedEnvelopeFilled } from '@ant-design/icons';
-import '../../Global/css/index.css'
+import '../../Shared/CSS/index.css'
 import { useNavigate } from 'react-router-dom';
 const { Title, Text } = Typography;
 
