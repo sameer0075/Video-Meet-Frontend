@@ -1,0 +1,21 @@
+/* calendar.css */
+.fc-daygrid-event {
+	color: #ffffff; /* Set the text color of event boxes */
+}
+
+.fc-daygrid-day {
+	background-color: #ffffff; /* Set the background color of day cells */
+	color: #ffffff; /* Set the text color of day cells */
+}
+
+.fc-toolbar {
+	color: #0066cc; /* Set the text color of the calendar header */
+}
+
+.fc-col-header {
+	background-color: #0066cc; /* Set the background color of the day cell headers */
+}
+
+.fc-col-header-cell-cushion {
+	color: #ffffff;
+}
