@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Row, Col } from 'antd';
-import '../../Shared/CSS/index.css'
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
-import './index.css'
 import CustomModel from '../../Shared/Model';
 import CustomForm from '../../Shared/Form';
 import { DropDownOptions } from '../../Shared/Form/interface';
+import '../../Shared/CSS/index.css'
+import './index.css'
 
 
 const Calender: React.FC = () => {
@@ -16,13 +16,14 @@ const Calender: React.FC = () => {
     const [custom_date,setCustomDate] = useState<Date | null> (null)
     const [notification_alert_type,setType] = useState<DropDownOptions> ({label:'Minutes',value:'minutes'})
     const [notification_alert_time,setTime] = useState<number> (15)
+    
     const calendarStyle = {
         height: '80%', // Set the calendar height to 100% of its container
         width: '80%', // Set the calendar width to 100% of its container
         marginBottom:'5rem',
     };
 
-    const handleChange = (setState:any) => (event:any) => {
+    const handleChange = (setState:Function) => (event:React.ChangeEvent<HTMLInputElement>) => {
         setState(event.target.value)
     }
 
