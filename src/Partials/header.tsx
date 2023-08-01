@@ -5,6 +5,10 @@ import { UserOutlined, AppstoreOutlined, MailOutlined } from '@ant-design/icons'
 const { Header } = Layout;
 
 const AppHeader: React.FC = () => {
+  const handleLogout = () => {
+    sessionStorage.removeItem("token")
+    window.location.href = '/'
+  }
   const token = sessionStorage.getItem('token')
   return (
     <Header className="header">
@@ -16,7 +20,7 @@ const AppHeader: React.FC = () => {
         <Menu.Item key="3" icon={<UserOutlined />}>
           Profile
         </Menu.Item>
-        {token && <Menu.Item key="2" icon={<MailOutlined />}>
+        {token && <Menu.Item onClick={handleLogout} key="2" icon={<MailOutlined />}>
           Logout
         </Menu.Item>}
       </Menu>

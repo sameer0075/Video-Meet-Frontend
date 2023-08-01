@@ -80,11 +80,19 @@ const userSlice = createSlice({
 			.addCase(LoginUser.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.user = action.payload;
+				sessionStorage.setItem("token",action.payload.token)
+				window.location.href = '/calender'
 			})
 			.addCase(LoginUser.rejected, (state, action: any) => {
-				const message: string = action.error.message;
+				const message: any = action.payload.message?.message ? action.payload.message?.message : action.payload.message;
 				state.isLoading = false;
-				toast.info(message);
+				if (typeof message === "string") {
+					toast.error(message);
+				} else {
+					message?.map((msg: string) => {
+						return toast.error(msg);
+					});
+				}
 			})
 			.addCase(VerifyOtp.pending, (state) => {
 				state.isLoading = true;
@@ -95,7 +103,7 @@ const userSlice = createSlice({
 				toast.info("Otp Validated Successfully")
 			})
 			.addCase(VerifyOtp.rejected, (state, action: any) => {
-				const message: any = action.error.message;
+				const message: any = action.payload.message;
 				state.isLoading = false;
 				if (typeof message === "string") {
 					toast.error(message);
@@ -133,7 +141,7 @@ const userSlice = createSlice({
 				toast.info("Data created successfully");
 			})
 			.addCase(AddNewUser.rejected, (state, action: any) => {
-				const message: any = action.error.message;
+				const message: any = action.payload.message;
 				state.isLoading = false;
 				if (typeof message === "string") {
 					toast.error(message);

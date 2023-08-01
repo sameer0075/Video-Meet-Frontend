@@ -12,11 +12,12 @@ export const PublicRoutes: RouteConfig[] = [
 	{
 		path: "/register",
 		component: <Register/>,
-	},
+	}
+];
+
+export const PrivateRoutes: RouteConfig[] = [
 	{
 		path:"/calender",
 		component: <Calender />
 	}
 ];
-
-export const PrivateRoutes: RouteConfig[] = [];
