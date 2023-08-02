@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { AddEvent } from "../../redux/Slices/Calender/calender.slice";
+import { CalenderRequestDto } from "../../redux/Slices/Calender/interface";
+
 import { DropDownOptions } from "../../Shared/Form/interface";
 
 export const CalenderState = () => {
@@ -11,6 +15,19 @@ export const CalenderState = () => {
 		value: "minutes",
 	});
 	const [notification_alert_time, setTime] = useState<number>(15);
+    const dispatch: any = useDispatch();
+
+    const resetState = () => {
+        setOpen(false)
+        setTitle("")
+        setDescription("")
+        setCustomDate(null)
+        setType({
+            label: "Minutes",
+            value: "minutes",
+        })
+        setTime(15)
+    }
 
 	const handleChange =
 		(setState: React.Dispatch<React.SetStateAction<any>>) =>
@@ -95,7 +112,19 @@ export const CalenderState = () => {
 	};
 
 	const handleSubmit = (data: any) => {
-		console.log("");
+		const obj:CalenderRequestDto = {
+            title,
+            description,
+            custom_date,
+            notification_alert_type:notification_alert_type.value,
+            notification_alert_time:Number(notification_alert_time),
+            instant:custom_date ? false : true
+        }
+        dispatch(AddEvent(obj)).then((response:any)=>{
+            if(response.payload) {
+                resetState()
+            }
+        })
 	};
 
 	return {

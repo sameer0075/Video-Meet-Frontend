@@ -49,9 +49,9 @@ export const CancelEvent = createAsyncThunk(
 
 export const GetEvents = createAsyncThunk(
 	"calender/list",
-	async (data: CalenderRequestDto, thunkAPI) => {
+	async (data,thunkAPI) => {
 		try {
-			const resp = await api.put<CalenderRequestDto>(`${url}${CALENDER_ENDPOINTS.GET_EVENTS}`, data);
+			const resp = await api.get<CalenderRequestDto>(`${url}${CALENDER_ENDPOINTS.GET_EVENTS}`);
 			return resp;
 		} catch (error: any) {
 			return thunkAPI.rejectWithValue(error.response.data);
@@ -71,6 +71,7 @@ const calenderSlice = createSlice({
 			.addCase(AddEvent.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.events = [...state.events,action.payload];
+				toast.info("Event Created Successfully")
 			})
 			.addCase(AddEvent.rejected, (state, action: any) => {
 				const message: string = action.error.message;

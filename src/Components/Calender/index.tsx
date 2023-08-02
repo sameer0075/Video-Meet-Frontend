@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Row, Col } from "antd";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
+import { useDispatch, useSelector } from "react-redux";
 import CustomModel from "../../Shared/Model";
 import CustomForm from "../../Shared/Form";
 import "../../Shared/CSS/index.css";
 import "./index.css";
 import { CalenderState } from "./states";
+import { GetEvents } from "../../redux/Slices/Calender/calender.slice";
 
 const Calender: React.FC = () => {
+	const dispatch: any = useDispatch();
+	const calender = useSelector((state:any) => state.calender);
 	const calendarStyle = {
 		height: "80%", // Set the calendar height to 100% of its container
 		width: "80%", // Set the calendar width to 100% of its container
 		marginBottom: "5rem",
 	};
+
+	useEffect(()=>{
+		dispatch(GetEvents())
+	},[])
+
+	const events = calender.events.map((info:any)=>{
+		const {custom_date,...rest} = info
+		return {
+			start:custom_date,
+			...rest
+		}
+	})
 
 	const {
 		open,
@@ -51,17 +67,7 @@ const Calender: React.FC = () => {
 							</div>
 						);
 					}}
-					events={[
-						// Add your events here
-						{
-							title: "Event 1",
-							start: "2023-07-10",
-						},
-						{
-							title: "Event 2",
-							start: "2023-07-15",
-						},
-					]}
+					events={events}
 					eventColor="green"
 					customButtons={{
 						customButton1: {

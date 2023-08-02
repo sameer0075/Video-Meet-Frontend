@@ -19,3 +19,7 @@
 .fc-col-header-cell-cushion {
 	color: #ffffff;
 }
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+	color: #000000;
+}

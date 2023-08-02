@@ -10,7 +10,7 @@ const CustomModel: React.FC<ModelInterface> = ({
     children,
   }) => {
   const handleClick = () => {
-      handleSubmit(false);
+      handleSubmit();
   }
   return (
     <React.Fragment>
